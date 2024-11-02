@@ -68,9 +68,9 @@
 				0DD7185F2CD69ABB00E1E781 /* Info.plist */,
 				FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */,
 				FE1681F52CD68D2A00B6367C /* ContentView.swift */,
+				FE4177B02CD6C4EB0036F8C0 /* Gameplay */,
 				0DD718652CD6A4E100E1E781 /* Onboarding View */,
 				0DC6D9CA2CD68E3A00E6DB78 /* Shared */,
-				A6F60B262CD6AB420010C7BB /* MapView.swift */,
 				3729F5382CD6B790003EFE7E /* PrepToolbarView.swift */,
 			);
 			path = MissileGame;
@@ -82,6 +82,14 @@
 				FE1681FA2CD68D2B00B6367C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FE4177B02CD6C4EB0036F8C0 /* Gameplay */ = {
+			isa = PBXGroup;
+			children = (
+				A6F60B262CD6AB420010C7BB /* MapView.swift */,
+			);
+			path = Gameplay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
