@@ -26,18 +26,16 @@ class LocationManager: NSObject, ObservableObject {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.allowsBackgroundLocationUpdates = true
     }
     
     func requestLocationAccess() {
+        manager.requestWhenInUseAuthorization()
         manager.requestAlwaysAuthorization()
     }
     
     func startFetchingCurrentLocation() {
         manager.startUpdatingLocation()
-    }
-    
-    func stopFetchingCurrentLocation() {
-        manager.stopUpdatingLocation()
     }
 }
 
@@ -55,9 +53,11 @@ extension LocationManager: CLLocationManagerDelegate {
         case .authorizedAlways:
             hasLocationAccess = true
         case .authorizedWhenInUse:
+            manager.requestAlwaysAuthorization()
             hasLocationAccess = false
         case .authorized:
-            hasLocationAccess = true
+            manager.requestAlwaysAuthorization()
+            hasLocationAccess = false
         @unknown default:
             hasLocationAccess = false
         }

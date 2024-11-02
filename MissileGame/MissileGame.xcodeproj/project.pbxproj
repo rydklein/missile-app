@@ -303,6 +303,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MissileGame/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please allow us to access your location!";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Please allow us to access your location!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow us to access your location!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -336,6 +338,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MissileGame/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please allow us to access your location!";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Please allow us to access your location!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow us to access your location!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
