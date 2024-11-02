@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DD7185F2CD69ABB00E1E781 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0DD718602CD69B0400E1E781 /* MissileGame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MissileGame.entitlements; sourceTree = "<group>"; };
 		FE1681F02CD68D2A00B6367C /* MissileGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissileGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissileGameApp.swift; sourceTree = "<group>"; };
 		FE1681F52CD68D2A00B6367C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -24,6 +26,10 @@
 		FE1682012CD6986800B6367C /* RequestLocationAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLocationAccessView.swift; sourceTree = "<group>"; };
 		FEDBCE182CD6A47E0005F3E4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		0DC6D9CA2CD68E3A00E6DB78 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		FE1681ED2CD68D2A00B6367C /* Frameworks */ = {
@@ -55,6 +61,9 @@
 		FE1681F22CD68D2A00B6367C /* MissileGame */ = {
 			isa = PBXGroup;
 			children = (
+				0DD718602CD69B0400E1E781 /* MissileGame.entitlements */,
+				0DD7185F2CD69ABB00E1E781 /* Info.plist */,
+				0DC6D9CA2CD68E3A00E6DB78 /* Shared */,
 				FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */,
 				FE1681F52CD68D2A00B6367C /* ContentView.swift */,
 				FE1681F72CD68D2B00B6367C /* Assets.xcassets */,
@@ -88,6 +97,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				0DC6D9CA2CD68E3A00E6DB78 /* Shared */,
+			);
 			name = MissileGame;
 			productName = MissileGame;
 			productReference = FE1681F02CD68D2A00B6367C /* MissileGame.app */;
@@ -117,6 +129,9 @@
 				Base,
 			);
 			mainGroup = FE1681E72CD68D2A00B6367C;
+			packageReferences = (
+				0DC6D9D12CD6953400E6DB78 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = FE1681F12CD68D2A00B6367C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,11 +292,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MissileGame/MissileGame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MissileGame/Preview Content\"";
+				DEVELOPMENT_TEAM = 9474QKS27P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MissileGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -305,11 +323,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MissileGame/MissileGame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MissileGame/Preview Content\"";
+				DEVELOPMENT_TEAM = 9474QKS27P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MissileGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -350,6 +371,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0DC6D9D12CD6953400E6DB78 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = FE1681E82CD68D2A00B6367C /* Project object */;
 }
