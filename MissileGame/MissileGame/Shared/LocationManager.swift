@@ -20,7 +20,7 @@ class LocationManager: NSObject, ObservableObject {
     private var missilesInRadius: [AttackLocationModel] = []
     
     @Published var userLocation: CLLocation?
-    @Published var hasLocationAccess: Bool = false
+    @Published var locationAccess: LocationAccess = .unknown
     
     override init() {
         super.init()
@@ -45,21 +45,17 @@ extension LocationManager: CLLocationManagerDelegate {
     {
         switch status {
         case .notDetermined:
-            hasLocationAccess = false
+            locationAccess = .unknown
         case .restricted:
-            hasLocationAccess = false
+            locationAccess = .denied
         case .denied:
-            hasLocationAccess = false
+            locationAccess = .denied
         case .authorizedAlways:
-            hasLocationAccess = true
+            locationAccess = .denied
         case .authorizedWhenInUse:
-            manager.requestAlwaysAuthorization()
-            hasLocationAccess = false
-        case .authorized:
-            manager.requestAlwaysAuthorization()
-            hasLocationAccess = false
+            locationAccess = .inUse
         @unknown default:
-            hasLocationAccess = false
+            locationAccess = .denied
         }
         startFetchingCurrentLocation()
     }
@@ -95,4 +91,11 @@ extension LocationManager: CLLocationManagerDelegate {
         }
         missilesInRadius = locations
     }
+}
+
+enum LocationAccess {
+    case unknown
+    case denied
+    case inUse
+    case always
 }
