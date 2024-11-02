@@ -81,8 +81,8 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        print("Did fetch location")
-        print (location)
+//        print("Did fetch location")
+//        print (location)
         userLocation = location
         
     }

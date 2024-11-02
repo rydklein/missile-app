@@ -19,7 +19,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         self.deviceToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("Successfully registered notifications")
         print(self.deviceToken!)
-//        self.sendDeviceTokenToServer(data: deviceToken)
+        Task {
+            await ServerManager.shared.updateUser(deviceToken: self.deviceToken)
+        }
     }
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: any Error) {
         notificationsRegistered = false
