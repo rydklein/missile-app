@@ -21,21 +21,27 @@ struct MapView: View {
     )
 
     var body: some View {
-        ZStack {
-            Map(coordinateRegion: $region, interactionModes: [.all], showsUserLocation: true)
-                .edgesIgnoringSafeArea(.all)
+        VStack {
+            ZStack {
+                Map(coordinateRegion: $region, interactionModes: [.all], showsUserLocation: true)
+                    .edgesIgnoringSafeArea(.all)
                 // .mapStyle(.mutedStandard)
-            
-            LinearGradient(gradient: Gradient(colors: [.purple, .white, .blue]),
-                           startPoint: .top,
-                           endPoint: .bottom)
+                
+                LinearGradient(gradient: Gradient(colors: [.purple, .white, .blue]),
+                               startPoint: .top,
+                               endPoint: .bottom)
                 .opacity(0.3)
                 .edgesIgnoringSafeArea(.all)
                 .allowsHitTesting(false)
+            }
+            
+            PrepToolbarView()
         }
+            .ignoresSafeArea()
     }
 }
 
 #Preview {
     MapView()
+        .ignoresSafeArea()
 }
