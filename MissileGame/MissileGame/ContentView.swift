@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        var locationManager = LocationManager()
-        if (!locationManager.hasLocationAccess){
+        switch LocationManager.shared.locationAccess {
+        case .unknown, .denied, .inUse:
             RequestLocationAccessView()
-        }
-        else{
+        case .always:
             MapView()
         }
     }

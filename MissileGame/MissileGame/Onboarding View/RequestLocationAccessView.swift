@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RequestLocationAccessView: View {
-    @ObservedObject var locationManager = LocationManager()
     var body: some View {
         Image(systemName: "sparkles")
             .resizable()
@@ -21,7 +20,16 @@ struct RequestLocationAccessView: View {
             .frame(width: 345, height: 45)
         
         Button("Allow Access") {
-            locationManager.requestLocationAccess()
+            switch LocationManager.shared.locationAccess {
+            case .unknown:
+                LocationManager.shared.requestWhenInUseAccess()
+            case .denied:
+                LocationManager.shared.requestWhenInUseAccess()
+            case .inUse:
+                LocationManager.shared.requestAlwaysLocationAccess()
+            case .always:
+                MapView()
+            }
         }
     }
 }

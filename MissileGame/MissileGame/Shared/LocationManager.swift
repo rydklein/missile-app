@@ -29,8 +29,16 @@ class LocationManager: NSObject, ObservableObject {
         manager.allowsBackgroundLocationUpdates = true
     }
     
-    func requestLocationAccess() {
+    func requestLocationAccess(){
+        self.requestWhenInUseAccess()
+        self.requestAlwaysLocationAccess()
+    }
+    
+    func requestWhenInUseAccess() {
         manager.requestWhenInUseAuthorization()
+    }
+    
+    func requestAlwaysLocationAccess() {
         manager.requestAlwaysAuthorization()
     }
     
@@ -51,7 +59,7 @@ extension LocationManager: CLLocationManagerDelegate {
         case .denied:
             locationAccess = .denied
         case .authorizedAlways:
-            locationAccess = .denied
+            locationAccess = .always
         case .authorizedWhenInUse:
             locationAccess = .inUse
         @unknown default:
