@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @State private var playerName: String = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Form {
+                Section(header: Text("Player name")) {
+                    TextField("Enter your name", text: $playerName)
+                }
+            }
+            Text(playerName)
+        }
+        .navigationTitle("Settings")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
 #Preview {
-    SettingsView()
+    NavigationStack {
+        SettingsView()
+    }
 }

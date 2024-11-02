@@ -9,11 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        switch LocationManager.shared.locationAccess {
-        case .unknown, .denied, .inUse:
-            RequestLocationAccessView()
-        case .always:
-            MapView()
+        NavigationStack {
+            switch LocationManager.shared.locationAccess {
+            case .unknown, .denied, .inUse:
+                RequestLocationAccessView()
+            case .always:
+                MapView()
+            }
         }
     }
 }
