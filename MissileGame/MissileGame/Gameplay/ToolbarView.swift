@@ -89,11 +89,11 @@ struct PlaceToolbarView: View {
     @Binding var placeMode: Bool
     var body: some View {
         VStack{
-            HStack{
-                Image(systemName: "chevron.backward")
-                Button{
-                    placeMode = false
-                } label: {
+            Button{
+                placeMode = false
+            } label: {
+                HStack{
+                    Image(systemName: "chevron.backward")
                     Text("Cast your spell")
                 }
             }
