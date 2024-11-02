@@ -26,14 +26,23 @@ struct PrepToolbarView: View {
                     .foregroundStyle(.white)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 35)
-                    .background(.red, in: .rect(cornerRadius: 20))
+                    .background(LinearGradient(
+                        gradient: Gradient(colors: [.blue, .purple]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ), in: .rect(cornerRadius: 20))
             }
             .padding()
             Spacer()
+            
             // Will have to be adjusted for player lives
             ForEach(0 ..< 3) { _ in
                 Image(systemName: "heart.fill")
-                    .foregroundStyle(.red)
+                    .foregroundStyle(LinearGradient(
+                        gradient: Gradient(colors: [.purple, .blue]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ))
                     .font(.title)
             }
             Spacer()
@@ -52,6 +61,7 @@ struct PrepToolbarView: View {
                 } label: {
                     Image(systemName: "gearshape.fill")
                         .font(.title2)
+                        .foregroundStyle(.primary)
                 }
                 .padding(.vertical, 10)
             }
