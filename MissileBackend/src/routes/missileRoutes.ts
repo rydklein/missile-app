@@ -1,18 +1,16 @@
 import { Router, Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { isBetween10and6EST } from '../utils/timeUtils'
+import { sendMissileNotification } from '../notiService'
 
 const router = Router()
 const prisma = new PrismaClient()
 
-router.get('/:gameId', async (req: Request, res: Response) => {
-    const { gameId } = req.params
-  
+router.get('/', async (req: Request, res: Response) => {  
     try {
       const missiles = await prisma.object.findMany({
         where: {
           type: 'missile',
-          gameId: Number(gameId),
         },
       })
       res.status(200).json(missiles)
@@ -23,10 +21,10 @@ router.get('/:gameId', async (req: Request, res: Response) => {
 
   
   router.post('/', async (req: Request, res: Response) => {
-    const { lat, long, ownerId, gameId } = req.body
+    const { lat, long, ownerId } = req.body
   
-    if (!lat || !long || !ownerId || !gameId) {
-      res.status(400).json({ error: 'lat, long, ownerId, and gameId are required' })
+    if (!lat || !long || !ownerId) {
+      res.status(400).json({ error: 'lat, long, and ownerId are required' })
       return
     }
   
@@ -38,7 +36,6 @@ router.get('/:gameId', async (req: Request, res: Response) => {
           type: 'missile', 
           launched: false,
           owner: { connect: { id: ownerId } },
-          game: { connect: { id: gameId } },
         },
       })
       res.status(201).json(newMissile)
@@ -93,12 +90,28 @@ router.get('/:gameId', async (req: Request, res: Response) => {
 
             })
             // TODO: Send notifications to all users. If they're currently in range of the missile, they shoudl get a different notification.
-
+            const ranges = await prisma.missileRange.findMany({
+                where: {
+                  missileId: Number(missileId),
+                },
+            })
+            
+            const userInRange = ranges.map(range => range.userId);
+            sendMissileNotification(userInRange)
             
             // This code is run a minute after the missile is launched.
             // loop over all users attached to the missile. If they're in range, take 1 away from their health and set a flag to "hit" on that missile for that user
             setTimeout(async () => {
                 
+                  
+                  for(const range of ranges){
+                    if (range.inRange){
+                        await prisma.user.update({
+                            where: { id: range.userId },
+                            data: { health: { decrement: 1 } },
+                        })
+                    }
+                  }
             }, 60000)
             res.status(200).json(updatedMissile)
         }

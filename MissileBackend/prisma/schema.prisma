@@ -8,32 +8,24 @@ datasource db {
 }
 
 model User {
-  id           Int               @id @default(autoincrement())
-  device_token String            @unique
-  name         String?
-  game         Game?             @relation(fields: [gameId], references: [id])
-  gameId       Int?
-  ownedObjects Object[]          @relation("UserObjects")
-  missileRanges MissileRange[]   
-}
-
-model Game {
-  id      Int       @id @default(autoincrement())
-  users   User[] 
-  objects Object[] 
+  id               Int            @id @default(autoincrement())
+  device_identifier String        @unique
+  device_token     String         @unique
+  name             String?
+  health            Int            @default(3)
+  ownedObjects     Object[]       @relation("UserObjects")
+  missileRanges    MissileRange[] // Relation to track missile range status for each user
 }
 
 model Object {
-  id       Int             @id @default(autoincrement())
-  lat      Float
-  long     Float
-  type     String
-  launched Boolean         @default(false)
-  owner    User            @relation("UserObjects", fields: [ownerId], references: [id])
-  ownerId  Int
-  game     Game            @relation(fields: [gameId], references: [id])
-  gameId   Int
-  missileRanges MissileRange[] 
+  id             Int            @id @default(autoincrement())
+  lat            Float
+  long           Float
+  type           String
+  launched       Boolean        @default(false)
+  owner          User           @relation("UserObjects", fields: [ownerId], references: [id])
+  ownerId        Int
+  missileRanges  MissileRange[] // Relation to track range status with users
 }
 
 model MissileRange {
@@ -42,8 +34,7 @@ model MissileRange {
   userId     Int
   missile    Object  @relation(fields: [missileId], references: [id])
   missileId  Int
-  inRange    Boolean 
+  inRange    Boolean // Indicates if user is in range of missile
 
-  @@unique([userId, missileId])
+  @@unique([userId, missileId]) // Unique constraint for each user-missile pair
 }
-

@@ -14,21 +14,19 @@ router.get("/", async (req, res) => {
 });
 
   router.post('/', async (req: Request, res: Response) => {
-    const { deviceIdentifier, deviceToken, userName, gameId } = req.body
+    const { deviceIdentifier, deviceToken, userName } = req.body
 
     try {
         const user = await prisma.user.upsert({
-            where: { id: deviceIdentifier },
+            where: { device_identifier: deviceIdentifier },
             update: {
                 device_token: deviceToken,
                 name: userName || null,
-                gameId: gameId || null,
             },
             create: {
-                id: deviceIdentifier,
+                device_identifier: deviceIdentifier,
                 device_token: deviceToken,
                 name: userName || null,
-                gameId: gameId || null,
             },
         })
 
