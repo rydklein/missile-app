@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct MissileGameApp: App {
@@ -13,6 +14,11 @@ struct MissileGameApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    LocationManager.shared.requestLocationAccess()
+                    LocationManager.shared.startFetchingCurrentLocation()
+                }
         }
+        .modelContainer(for: AttackLocationModel.self)
     }
 }
