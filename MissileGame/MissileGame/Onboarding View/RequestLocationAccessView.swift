@@ -24,8 +24,10 @@ struct RequestLocationAccessView: View {
             switch LocationManager.shared.locationAccess {
             case .unknown:
                 LocationManager.shared.requestWhenInUseAccess()
+                LocationManager.shared.requestAlwaysLocationAccess()
             case .denied:
                 LocationManager.shared.requestWhenInUseAccess()
+                LocationManager.shared.requestAlwaysLocationAccess()
             case .inUse:
                 LocationManager.shared.requestAlwaysLocationAccess()
             case .always:
