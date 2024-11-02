@@ -30,7 +30,7 @@ struct MapView: View {
                         UserAnnotation()
                     }
                     .onTapGesture(perform: { screenCoord in
-                        pinLocation = reader.convert(screenCoord, from: xxw.local)
+                        pinLocation = reader.convert(screenCoord, from: .local)
                         print(pinLocation)
                     })
                     .mapControls {
