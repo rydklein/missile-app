@@ -36,17 +36,17 @@ struct MapView: View {
                     .mapControls {
                         MapUserLocationButton(scope: mapScope)
                     }
-                    LinearGradient(gradient: Gradient(colors: [.purple, .white, .blue]),
-                                   startPoint: .top,
-                                   endPoint: .bottom)
-                        .opacity(0.3)
-                        .edgesIgnoringSafeArea(.all)
-                        .allowsHitTesting(false)
                 }
-                ToolbarView()
+                LinearGradient(gradient: Gradient(colors: [.purple, .white, .blue]),
+                               startPoint: .top,
+                               endPoint: .bottom)
+                    .opacity(0.3)
+                    .edgesIgnoringSafeArea(.all)
+                    .allowsHitTesting(false)
             }
-            .mapScope(mapScope)
+            ToolbarView()
         }
+        .mapScope(mapScope)
     }
 }
 
