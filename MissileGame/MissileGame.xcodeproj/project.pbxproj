@@ -11,6 +11,8 @@
 		FE1681F62CD68D2A00B6367C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1681F52CD68D2A00B6367C /* ContentView.swift */; };
 		FE1681F82CD68D2B00B6367C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1681F72CD68D2B00B6367C /* Assets.xcassets */; };
 		FE1681FB2CD68D2B00B6367C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1681FA2CD68D2B00B6367C /* Preview Assets.xcassets */; };
+		FE1682022CD6986800B6367C /* RequestLocationAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1682012CD6986800B6367C /* RequestLocationAccessView.swift */; };
+		FEDBCE192CD6A47E0005F3E4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDBCE182CD6A47E0005F3E4 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		FE1681F52CD68D2A00B6367C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FE1681F72CD68D2B00B6367C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE1681FA2CD68D2B00B6367C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FE1682012CD6986800B6367C /* RequestLocationAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLocationAccessView.swift; sourceTree = "<group>"; };
+		FEDBCE182CD6A47E0005F3E4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				FE1681F52CD68D2A00B6367C /* ContentView.swift */,
 				FE1681F72CD68D2B00B6367C /* Assets.xcassets */,
 				FE1681F92CD68D2B00B6367C /* Preview Content */,
+				FE1682012CD6986800B6367C /* RequestLocationAccessView.swift */,
+				FEDBCE182CD6A47E0005F3E4 /* LocationManager.swift */,
 			);
 			path = MissileGame;
 			sourceTree = "<group>";
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEDBCE192CD6A47E0005F3E4 /* LocationManager.swift in Sources */,
 				FE1681F62CD68D2A00B6367C /* ContentView.swift in Sources */,
 				FE1681F42CD68D2A00B6367C /* MissileGameApp.swift in Sources */,
+				FE1682022CD6986800B6367C /* RequestLocationAccessView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
