@@ -62,14 +62,14 @@
 		FE1681F22CD68D2A00B6367C /* MissileGame */ = {
 			isa = PBXGroup;
 			children = (
-				0DD718652CD6A4E100E1E781 /* Onboarding View */,
+				FE1681F92CD68D2B00B6367C /* Preview Content */,
+				FE1681F72CD68D2B00B6367C /* Assets.xcassets */,
 				0DD718602CD69B0400E1E781 /* MissileGame.entitlements */,
 				0DD7185F2CD69ABB00E1E781 /* Info.plist */,
-				0DC6D9CA2CD68E3A00E6DB78 /* Shared */,
 				FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */,
 				FE1681F52CD68D2A00B6367C /* ContentView.swift */,
-				FE1681F72CD68D2B00B6367C /* Assets.xcassets */,
-				FE1681F92CD68D2B00B6367C /* Preview Content */,
+				0DD718652CD6A4E100E1E781 /* Onboarding View */,
+				0DC6D9CA2CD68E3A00E6DB78 /* Shared */,
 				A6F60B262CD6AB420010C7BB /* MapView.swift */,
 				3729F5382CD6B790003EFE7E /* PrepToolbarView.swift */,
 			);
