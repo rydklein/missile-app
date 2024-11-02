@@ -35,7 +35,7 @@ struct MapView: View {
                 .allowsHitTesting(false)
             }
             
-            PrepToolbarView()
+            ToolbarView()
         }
             .ignoresSafeArea()
     }
