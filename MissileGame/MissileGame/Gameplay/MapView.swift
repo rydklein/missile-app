@@ -8,6 +8,7 @@
 import MapKit
 import SwiftUI
 
+
 struct MapView: View {
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
@@ -19,20 +20,26 @@ struct MapView: View {
             longitudeDelta: 0.2
         )
     )
-
+    @State private var pinLocation = LocationManager.shared.userLocation?.coordinate
     var body: some View {
         VStack {
             ZStack {
-                Map(coordinateRegion: $region, interactionModes: [.all], showsUserLocation: true)
+                MapReader{ reader in
+                    Map(coordinateRegion: $region, interactionModes: [.all], showsUserLocation: true)
+                        .edgesIgnoringSafeArea(.all)
+                        .onTapGesture(perform: { screenCoord in
+                            pinLocation = reader.convert(screenCoord, from: .local)
+                            print(pinLocation)
+                        })
+                    // .mapStyle(.mutedStandard)
+                }
+                    LinearGradient(gradient: Gradient(colors: [.purple, .white, .blue]),
+                                   startPoint: .top,
+                                   endPoint: .bottom)
+                    .opacity(0.3)
                     .edgesIgnoringSafeArea(.all)
-                // .mapStyle(.mutedStandard)
+                    .allowsHitTesting(false)
                 
-                LinearGradient(gradient: Gradient(colors: [.purple, .white, .blue]),
-                               startPoint: .top,
-                               endPoint: .bottom)
-                .opacity(0.3)
-                .edgesIgnoringSafeArea(.all)
-                .allowsHitTesting(false)
             }
             
             ToolbarView()
