@@ -6,15 +6,18 @@
 //
 import SwiftUI
 
-struct ToolbarView: View{
+struct ToolbarView: View {
     @State public var placeMode = false
-    var body: some View{
-        switch placeMode{
-        case false:
-            PrepToolbarView(placeMode: $placeMode)
-        case true:
-            PlaceToolbarView(placeMode: $placeMode)
+    var body: some View {
+        Group {
+            switch placeMode {
+            case false:
+                PrepToolbarView(placeMode: $placeMode)
+            case true:
+                PlaceToolbarView(placeMode: $placeMode)
+            }
         }
+        .transition(.move(edge: !placeMode ? .leading : .trailing))
     }
 }
 
@@ -24,7 +27,9 @@ struct PrepToolbarView: View {
         HStack {
             Spacer()
             Button {
-                placeMode = true
+                withAnimation {
+                    placeMode = true
+                }
             } label: {
 //                Rectangle()
 //                    .fill(Color.red)
@@ -40,23 +45,15 @@ struct PrepToolbarView: View {
                     .foregroundStyle(.white)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 35)
-                    .background(LinearGradient(
-                        gradient: Gradient(colors: [.blue, .purple]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ), in: .rect(cornerRadius: 20))
+                    .background(.blue, in: .rect(cornerRadius: 20))
             }
             .padding()
             Spacer()
-            
+
             // Will have to be adjusted for player lives
             ForEach(0 ..< 3) { _ in
                 Image(systemName: "heart.fill")
-                    .foregroundStyle(LinearGradient(
-                        gradient: Gradient(colors: [.purple, .blue]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ))
+                    .foregroundStyle(.purple)
                     .font(.title)
             }
             Spacer()
@@ -69,7 +66,7 @@ struct PrepToolbarView: View {
                         .font(.title2)
                 }
                 .padding(.vertical, 10)
-                
+
                 NavigationLink {
                     SettingsView()
                 } label: {
@@ -88,37 +85,48 @@ struct PrepToolbarView: View {
 struct PlaceToolbarView: View {
     @Binding var placeMode: Bool
     var body: some View {
-        VStack{
-            Button{
-                placeMode = false
-            } label: {
-                HStack{
+
+        VStack {
+            HStack {
+                Button {
+                    withAnimation {
+                        placeMode = false
+                    }
+                } label: {
                     Image(systemName: "chevron.backward")
-                    Text("Cast your spell")
+                    Text("Back")
+                    
                 }
-            }
-            HStack{
                 Spacer()
-                Button{
+                Text("Cast your spell")
+                    .padding(.leading, 10)
+                Spacer()
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Button {
                     print("Missile button pressed")
                 } label: {
                     Image(systemName: "bolt.horizontal.fill")
                         .font(.title)
                         .foregroundStyle(.primary)
-                }.padding()
+                }
                 Spacer()
-                Button{
+                Button {
                     print("Shield button pressed")
                 } label: {
-                    Image(systemName: "shield.checkered")
+                    Image(systemName: "bolt.shield")
                         .font(.title)
                         .foregroundStyle(.primary)
-                }.padding()
+                }
                 Spacer()
             }
-            
-        }.ignoresSafeArea()
             .padding()
+        }
+        .ignoresSafeArea()
+        .padding([.top, .horizontal])
+        .padding(.bottom, 12)
         .background(.regularMaterial)
     }
 }
