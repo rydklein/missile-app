@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import userRoutes from './routes/userRoutes'
+import missilesRoutes from './routes/missileRoutes'
 import { PrismaClient } from '@prisma/client'
 
 dotenv.config()
@@ -9,6 +10,7 @@ const prisma = new PrismaClient()
 
 app.use(express.json())
 app.use('/users', userRoutes)
+app.use('/missiles', missilesRoutes);
 
 
 app.get('/', (req: Request, res: Response) => {

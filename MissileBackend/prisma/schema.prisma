@@ -8,24 +8,42 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  device_token String   @unique
+  id           Int               @id @default(autoincrement())
+  device_token String            @unique
   name         String?
-  game         Game?    @relation(fields: [gameId], references: [id]) // User belongs to one Game
+  game         Game?             @relation(fields: [gameId], references: [id])
   gameId       Int?
-  ownedObjects Object[] @relation("UserObjects")
+  ownedObjects Object[]          @relation("UserObjects")
+  missileRanges MissileRange[]   
 }
 
 model Game {
-  id    Int    @id @default(autoincrement())
-  users User[] 
+  id      Int       @id @default(autoincrement())
+  users   User[] 
+  objects Object[] 
 }
 
 model Object {
-  id       Int    @id @default(autoincrement())
+  id       Int             @id @default(autoincrement())
   lat      Float
   long     Float
   type     String
-  owner    User   @relation("UserObjects", fields: [ownerId], references: [id]) //Objects belong to one user
+  launched Boolean         @default(false)
+  owner    User            @relation("UserObjects", fields: [ownerId], references: [id])
   ownerId  Int
+  game     Game            @relation(fields: [gameId], references: [id])
+  gameId   Int
+  missileRanges MissileRange[] 
 }
+
+model MissileRange {
+  id         Int     @id @default(autoincrement())
+  user       User    @relation(fields: [userId], references: [id])
+  userId     Int
+  missile    Object  @relation(fields: [missileId], references: [id])
+  missileId  Int
+  inRange    Boolean 
+
+  @@unique([userId, missileId])
+}
+

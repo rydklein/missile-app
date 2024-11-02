@@ -13,42 +13,31 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req: Request, res: Response) => {
-  const { deviceIdentifier, deviceToken } = req.body;
+  router.post('/', async (req: Request, res: Response) => {
+    const { deviceIdentifier, deviceToken, userName, gameId } = req.body
 
-  try {
-    const user = await prisma.user.create({
-      data: { id: deviceIdentifier, device_token: deviceToken, name: null },
-    });
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(500).json({ error: "Error creating user" });
-  }
-});
+    try {
+        const user = await prisma.user.upsert({
+            where: { id: deviceIdentifier },
+            update: {
+                device_token: deviceToken,
+                name: userName || null,
+                gameId: gameId || null,
+            },
+            create: {
+                id: deviceIdentifier,
+                device_token: deviceToken,
+                name: userName || null,
+                gameId: gameId || null,
+            },
+        })
 
-router.put("/", async (req: Request, res: Response) => {
-  const { deviceIdentifier, deviceToken, userName } = req.body;
-
-  try {
-    const data: { name?: string; deviceToken?: string } = {};
-
-    if (userName) {
-      data.name = userName;
+        res.status(201).json(user)
+    } catch (error) {
+        res.status(500).json({ error: 'Error creating or updating user' })
     }
-    if (deviceToken) {
-      data.deviceToken = deviceToken;
-    }
+})
 
-    const user = await prisma.user.update({
-      where: {
-        id: deviceIdentifier,
-      },
-      data,
-    });
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(500).json({ error: "Error updating user" });
-  }
-});
 
-export default router;
+
+export default router
