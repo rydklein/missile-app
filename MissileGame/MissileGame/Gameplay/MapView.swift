@@ -11,8 +11,8 @@ import SwiftUI
 struct MapView: View {
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(
-            latitude: 37.334900,
-            longitude: -122.009020
+            latitude: LocationManager.shared.userLocation?.coordinate.latitude ?? 00,
+            longitude: LocationManager.shared.userLocation?.coordinate.longitude ?? 00
         ),
         span: MKCoordinateSpan(
             latitudeDelta: 0.2,
@@ -22,8 +22,7 @@ struct MapView: View {
 
     var body: some View {
         ZStack {
-            Map()
-            Map(coordinateRegion: $region, interactionModes: [.all])
+            Map(coordinateRegion: $region, interactionModes: [.all], showsUserLocation: true)
                 .edgesIgnoringSafeArea(.all)
                 // .mapStyle(.mutedStandard)
             
