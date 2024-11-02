@@ -4,49 +4,67 @@
 //
 //  Created by asimraja on 11/2/24.
 //
-
 import SwiftUI
-
 struct PrepToolbarView: View {
     var body: some View {
         HStack {
+            Spacer()
             Button {
-                
+                print("Prep button pressed")
             } label: {
-                ZStack {
-                    Rectangle()
-                        .fill(Color.red)
-                        .frame(width: 100, height: 100)
-                        .cornerRadius(20)
-                    Text("Get Ready")
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                }
+//                Rectangle()
+//                    .fill(Color.red)
+//                    .frame(width: 90, height: 90)
+//                    .cornerRadius(20)
+//                    .overlay(alignment: .center) {
+//                        Text("Prepare")
+//                            .fontWeight(.semibold)
+//                            .foregroundStyle(.white)
+//                    }
+                Text("Prepare")
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 35)
+                    .background(.red, in: .rect(cornerRadius: 20))
             }
-            
-            ForEach(0..<3) { i in
+            .padding()
+            Spacer()
+            // Will have to be adjusted for player lives
+            ForEach(0 ..< 3) { _ in
                 Image(systemName: "heart.fill")
                     .foregroundStyle(.red)
+                    .font(.title)
             }
-            
+            Spacer()
+            Spacer()
             VStack {
                 Button {
                     print("Lobby pressed")
                 } label: {
                     Image(systemName: "person.3.fill")
-                        .padding()
+                        .font(.title2)
                 }
+                .padding(.vertical, 10)
+                
                 Button {
                     print("Settings pressed")
                 } label: {
                     Image(systemName: "gearshape.fill")
-                        .padding()
+                        .font(.title2)
                 }
+                .padding(.vertical, 10)
             }
+            Spacer()
         }
+        .ignoresSafeArea()
+        .background(.regularMaterial)
     }
 }
-
 #Preview {
-    PrepToolbarView()
+    VStack {
+        Spacer()
+        PrepToolbarView()
+    }
+    .ignoresSafeArea()
 }
