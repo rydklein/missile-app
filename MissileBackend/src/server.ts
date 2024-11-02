@@ -7,6 +7,7 @@ dotenv.config()
 const app = express()
 const prisma = new PrismaClient()
 
+app.use(express.json())
 app.use('/users', userRoutes)
 
 
