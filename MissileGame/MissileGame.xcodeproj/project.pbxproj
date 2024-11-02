@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3729F5392CD6B790003EFE7E /* PrepToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729F5382CD6B790003EFE7E /* PrepToolbarView.swift */; };
 		A6F60B272CD6AB420010C7BB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F60B262CD6AB420010C7BB /* MapView.swift */; };
 		FE1681F42CD68D2A00B6367C /* MissileGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */; };
 		FE1681F62CD68D2A00B6367C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1681F52CD68D2A00B6367C /* ContentView.swift */; };
@@ -17,6 +18,7 @@
 /* Begin PBXFileReference section */
 		0DD7185F2CD69ABB00E1E781 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0DD718602CD69B0400E1E781 /* MissileGame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MissileGame.entitlements; sourceTree = "<group>"; };
+		3729F5382CD6B790003EFE7E /* PrepToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepToolbarView.swift; sourceTree = "<group>"; };
 		A6F60B262CD6AB420010C7BB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		FE1681F02CD68D2A00B6367C /* MissileGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissileGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissileGameApp.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				FE1681F72CD68D2B00B6367C /* Assets.xcassets */,
 				FE1681F92CD68D2B00B6367C /* Preview Content */,
 				A6F60B262CD6AB420010C7BB /* MapView.swift */,
+				3729F5382CD6B790003EFE7E /* PrepToolbarView.swift */,
 			);
 			path = MissileGame;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				A6F60B272CD6AB420010C7BB /* MapView.swift in Sources */,
 				FE1681F62CD68D2A00B6367C /* ContentView.swift in Sources */,
 				FE1681F42CD68D2A00B6367C /* MissileGameApp.swift in Sources */,
+				3729F5392CD6B790003EFE7E /* PrepToolbarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
