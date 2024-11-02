@@ -8,6 +8,7 @@
 import CoreLocation
 import Foundation
 import SwiftData
+import MapKit
 
 class LocationManager: NSObject, ObservableObject {
     public static let shared = LocationManager()

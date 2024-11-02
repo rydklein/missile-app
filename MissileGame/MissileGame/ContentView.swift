@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        var locationManager = LocationManager()
+        if (!locationManager.hasLocationAccess){
+            RequestLocationAccessView()
         }
-        .padding()
+        else{
+            MapView()
+        }
     }
 }
 
