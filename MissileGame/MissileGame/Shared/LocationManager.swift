@@ -6,11 +6,12 @@
 //
 
 import CoreLocation
+import SwiftUI
 import Foundation
 import SwiftData
 import MapKit
 
-class LocationManager: NSObject, ObservableObject {
+@Observable class LocationManager: NSObject {
     public static let shared = LocationManager()
     
     private let manager = CLLocationManager()
@@ -19,8 +20,8 @@ class LocationManager: NSObject, ObservableObject {
     
     private var missilesInRadius: [AttackLocationModel] = []
     
-    @Published var userLocation: CLLocation?
-    @Published var locationAccess: LocationAccess = .unknown
+    var userLocation: CLLocation?
+    var locationAccess: LocationAccess = .unknown
     
     override init() {
         super.init()
@@ -54,16 +55,22 @@ extension LocationManager: CLLocationManagerDelegate {
         switch status {
         case .notDetermined:
             locationAccess = .unknown
+            break
         case .restricted:
             locationAccess = .denied
+            break
         case .denied:
             locationAccess = .denied
+            break
         case .authorizedAlways:
             locationAccess = .always
+            break
         case .authorizedWhenInUse:
             locationAccess = .inUse
+            break
         @unknown default:
             locationAccess = .denied
+            break
         }
         startFetchingCurrentLocation()
     }

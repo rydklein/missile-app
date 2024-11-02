@@ -20,6 +20,7 @@ struct RequestLocationAccessView: View {
             .frame(width: 345, height: 45)
         
         Button("Allow Access") {
+            print(LocationManager.shared.locationAccess)
             switch LocationManager.shared.locationAccess {
             case .unknown:
                 LocationManager.shared.requestWhenInUseAccess()
@@ -28,7 +29,7 @@ struct RequestLocationAccessView: View {
             case .inUse:
                 LocationManager.shared.requestAlwaysLocationAccess()
             case .always:
-                MapView()
+                break
             }
         }
     }
