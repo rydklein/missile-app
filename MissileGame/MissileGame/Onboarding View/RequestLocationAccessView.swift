@@ -15,9 +15,8 @@ struct RequestLocationAccessView: View {
             .frame(width: 50, height: 50)
             .foregroundColor(.blue)
         
-        Text("To get into the magic, we need your location information")
+        Text("To get into the magic, we need your location information.")
             .multilineTextAlignment(.center)
-            .frame(width: 345, height: 45)
         
         Button("Allow Access") {
             print(LocationManager.shared.locationAccess)
