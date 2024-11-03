@@ -8,33 +8,41 @@ import MapKit
 import SwiftUI
 
 struct ToolbarView: View {
-    @State public var placeMode = false
     // Whatever man. You can have two sources of truth. I don't care anymore
     @Binding public var gameManager: GameManager
+    @State public var placeMode: ToolbarType = .prep
     @Binding public var pinLocation: CLLocationCoordinate2D?
     @Binding public var missileLocation: CLLocationCoordinate2D?
     @Binding public var shieldLocation: CLLocationCoordinate2D?
     var body: some View{
-        Group {
-            switch placeMode {
-            case false:
-                PrepToolbarView(placeMode: $placeMode, gameManager: $gameManager)
-            case true:
-                PlaceToolbarView(placeMode: $placeMode, pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
+//        Group {
+            if gameManager.incomingMissile != nil {
+                DangerNotificationView()
+            } else {
+                switch placeMode {
+                case .prep:
+                    PrepToolbarView(gameManager: $gameManager, placeMode: $placeMode)
+                case .place:
+                    PlaceToolbarView(placeMode: $placeMode, pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
+                case .action:
+                    PrepToolbarView(gameManager: $gameManager, placeMode: $placeMode)
+                default:
+                    EmptyView()
+                }
             }
-        }
-        .transition(.move(edge: !placeMode ? .leading : .trailing))
+//        }
+//        .transition(.move(edge: !placeMode ? .leading : .trailing))
     }
 }
 
 struct PrepToolbarView: View {
-    @Binding var placeMode: Bool
     @Binding var gameManager: GameManager
+    @Binding var placeMode: ToolbarType
     var body: some View {
         VStack {
             Button {
                 withAnimation {
-                    placeMode = true
+                    placeMode = .place
                 }
             } label: {
                 Text("✨ Cast Spells ✨")
@@ -92,7 +100,7 @@ struct PrepToolbarView: View {
 }
 
 struct PlaceToolbarView: View {
-    @Binding var placeMode: Bool
+    @Binding var placeMode: ToolbarType
     @Binding var pinLocation: CLLocationCoordinate2D?
     @Binding public var missileLocation: CLLocationCoordinate2D?
     @Binding public var shieldLocation: CLLocationCoordinate2D?
@@ -101,7 +109,7 @@ struct PlaceToolbarView: View {
             HStack {
                 Button {
                     withAnimation {
-                        placeMode = false
+                        placeMode = .prep
                     }
                 } label: {
                     Image(systemName: "chevron.backward")
@@ -164,4 +172,11 @@ struct PlaceToolbarView: View {
             ToolbarView(gameManager: $gameManager, pinLocation: $test, missileLocation: $test, shieldLocation: $test)
         }
     }
+}
+
+enum ToolbarType {
+    case prep
+    case place
+    case danger
+    case action
 }

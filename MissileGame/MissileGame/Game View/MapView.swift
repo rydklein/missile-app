@@ -25,11 +25,16 @@ struct MapView: View {
                         }
                         if let missileLocation = gameManager.myMissileLocation {
                             MapCircle(center: missileLocation, radius: Constants.MISSILE_RADIUS)
-                                .foregroundStyle(.red)
+                                .foregroundStyle(.orange)
                         }
                         if let shieldLocation = gameManager.myShieldLocation {
                             MapCircle(center: shieldLocation, radius: Constants.MISSILE_RADIUS)
                                 .foregroundStyle(.blue)
+                        }
+                        if let enemyMissileLocation = gameManager.incomingMissile?.location {
+                            MapCircle(center: gameManager.incomingMissile?.location ?? CLLocationCoordinate2D(latitude: 00, longitude: 00), radius: Constants.MISSILE_RADIUS)
+                                .foregroundStyle(.red)
+                            
                         }
                     }
                     .onTapGesture(perform: { screenCoord in
