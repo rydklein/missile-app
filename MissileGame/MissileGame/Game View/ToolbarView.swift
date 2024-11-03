@@ -25,7 +25,7 @@ struct ToolbarView: View {
                 case .place:
                     PlaceToolbarView(placeMode: $placeMode, pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
                 case .action:
-                    PrepToolbarView(gameManager: $gameManager, placeMode: $placeMode)
+                    ActionToolbarView(placeMode: $placeMode, gameManager: $gameManager)
                 default:
                     EmptyView()
                 }
@@ -40,22 +40,40 @@ struct PrepToolbarView: View {
     @Binding var placeMode: ToolbarType
     var body: some View {
         VStack {
-            Button {
-                withAnimation {
-                    placeMode = .place
+            if (gameManager.gameState == .planning) {
+                Button {
+                    withAnimation {
+                        placeMode = .place
+                    }
+                } label: {
+                    // eligibility reference
+                    Text("✨ Cast Spells ✨")
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(.blue, in: RoundedRectangle(cornerRadius: 23))
                 }
-            } label: {
-                // eligibility reference
-                Text("✨ Cast Spells ✨")
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(.blue, in: RoundedRectangle(cornerRadius: 23))
             }
-            
+            else {
+                Button {
+                    withAnimation {
+                        placeMode = .action
+                    }
+                } label: {
+                    // eligibility reference
+                    Text("✨ Launch Magic Missile! ✨")
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(.blue, in: RoundedRectangle(cornerRadius: 23))
+                }
+            }
             HStack {
                 Button {
                     print("Lobby pressed")
@@ -163,6 +181,51 @@ struct PlaceToolbarView: View {
         .background(.regularMaterial)
     }
 }
+
+struct ActionToolbarView: View {
+    @Binding var placeMode: ToolbarType
+    @Binding var gameManager: GameManager
+    var body: some View {
+        VStack {
+            HStack {
+                Button {
+                    withAnimation {
+                        placeMode = .prep
+                    }
+                } label: {
+                    Image(systemName: "chevron.backward")
+                    Text("Back")
+                }
+                Spacer()
+                Text("Confirm Launch?")
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .padding(.trailing, 55)
+                Spacer()
+            }
+            HStack {
+                Button {
+                    print("Launch button pressed")
+                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                } label: {
+                    Image(systemName: "bolt.circle")
+                        .font(.system(size: 60))
+                        .foregroundStyle(.primary)
+                        .padding(.trailing, 20)
+                }
+            }
+            .padding(.bottom, 23)
+        }
+        .ignoresSafeArea()
+        .padding([.top, .horizontal])
+        .background(.regularMaterial)
+    }
+}
+
 
 #Preview {
     @Previewable @State var test: CLLocationCoordinate2D? = nil
