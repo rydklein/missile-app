@@ -11,13 +11,23 @@ import UIKit
 class ServerManager {
     public static let shared = ServerManager()
     
-    public let attackLocations: [AttackLocationModel] = []
+    public func launchMissile() {
+        
+    }
+    
+    public func placeMissile(lat: Double, long: Double) {
+        
+    }
+    
+    public func placeShield(lat: Double, long: Double) {
+        
+    }
     
     public func refreshAttackLocations() async {
         
     }
     
-    public func sendUserMissilesToServer(_ missiles: [AttackLocationModel]) {
+    public func sendUserInRangeMissilesToServer(_ missiles: [AttackLocationModel]) {
         
     }
     
@@ -33,12 +43,7 @@ class ServerManager {
         let jsonData = try! JSONEncoder().encode(payload)
         request.httpBody = jsonData
         
-        if let (data, res) = try? await URLSession.shared.data(for: request) {
-            if let httpResponse = res as? HTTPURLResponse {
-                print(httpResponse.statusCode)
-                print(String(data: data, encoding: .utf8))
-            }
-        }
+        _ = try? await URLSession.shared.data(for: request)
     }
     
     private func getDeviceIdentifier() -> String {
