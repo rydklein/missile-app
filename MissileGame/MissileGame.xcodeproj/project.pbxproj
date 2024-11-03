@@ -16,7 +16,6 @@
 		FE1681F62CD68D2A00B6367C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1681F52CD68D2A00B6367C /* ContentView.swift */; };
 		FE1681F82CD68D2B00B6367C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1681F72CD68D2B00B6367C /* Assets.xcassets */; };
 		FE1681FB2CD68D2B00B6367C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1681FA2CD68D2B00B6367C /* Preview Assets.xcassets */; };
-		FE8333622CD6FDC600A0F706 /* DangerNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8333612CD6FDC600A0F706 /* DangerNotificationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +31,6 @@
 		FE1681F52CD68D2A00B6367C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FE1681F72CD68D2B00B6367C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE1681FA2CD68D2B00B6367C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FE8333612CD6FDC600A0F706 /* DangerNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerNotificationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -99,7 +97,6 @@
 				3729F55E2CD6C9D3003EFE7E /* PhaseTimeView.swift */,
 				3729F5602CD6CECB003EFE7E /* SettingsView.swift */,
 				A652AB6E2CD6D19C0034D16C /* LobbyView.swift */,
-				FE8333612CD6FDC600A0F706 /* DangerNotificationView.swift */,
 			);
 			path = Gameplay;
 			sourceTree = "<group>";
@@ -182,7 +179,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6F60B272CD6AB420010C7BB /* MapView.swift in Sources */,
-				FE8333622CD6FDC600A0F706 /* DangerNotificationView.swift in Sources */,
 				FE1681F62CD68D2A00B6367C /* ContentView.swift in Sources */,
 				3729F55F2CD6C9D3003EFE7E /* PhaseTimeView.swift in Sources */,
 				FE1681F42CD68D2A00B6367C /* MissileGameApp.swift in Sources */,
