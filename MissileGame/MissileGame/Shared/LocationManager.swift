@@ -102,7 +102,7 @@ extension LocationManager: CLLocationManagerDelegate {
         if (!locations.elementsEqual(missilesInRadius, by: {
             $0.id == $1.id
         })) {
-            ServerManager.shared.sendUserMissilesToServer(locations)
+            ServerManager.shared.sendUserInRangeMissilesToServer(locations)
         }
         missilesInRadius = locations
     }

@@ -10,20 +10,27 @@ import UIKit
 class AppDelegate: NSObject, UIApplicationDelegate {
     var notificationsRegistered = false
     var deviceToken: String? = nil
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    {
         application.registerForRemoteNotifications()
+
         return true
     }
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+    func application(_: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         notificationsRegistered = true
         self.deviceToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        print("Successfully registered notifications")
-        print(self.deviceToken!)
         Task {
             await ServerManager.shared.updateUser(deviceToken: self.deviceToken)
         }
     }
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: any Error) {
+
+    func application(
+        _ application: UIApplication,
+        didFailToRegisterForRemoteNotificationsWithError error: any Error)
+    {
         notificationsRegistered = false
         print("Failed to register notifications")
         print(error.localizedDescription)
@@ -31,7 +38,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             try? await Task.sleep(for: .seconds(5))
             application.registerForRemoteNotifications()
         }
-//        Handle failed
     }
 }
-

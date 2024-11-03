@@ -17,8 +17,9 @@ struct RequestLocationAccessView: View {
         
         Text("To get into the magic, we need your location information.")
             .multilineTextAlignment(.center)
+            .padding()
         
-        Button("Allow Access") {
+        Button("Grant permission") {
             print(LocationManager.shared.locationAccess)
             switch LocationManager.shared.locationAccess {
             case .unknown:
