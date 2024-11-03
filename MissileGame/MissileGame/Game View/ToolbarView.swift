@@ -15,7 +15,7 @@ struct ToolbarView: View {
     @Binding public var missileLocation: CLLocationCoordinate2D?
     @Binding public var shieldLocation: CLLocationCoordinate2D?
     var body: some View{
-//        Group {
+        Group {
             if gameManager.incomingMissile != nil {
                 DangerNotificationView(gameManager: $gameManager)
             } else {
@@ -30,8 +30,8 @@ struct ToolbarView: View {
                     EmptyView()
                 }
             }
-//        }
-//        .transition(.move(edge: !placeMode ? .leading : .trailing))
+        }
+        .transition(.move(edge: placeMode == .prep ? .leading : .trailing))
     }
 }
 
@@ -64,7 +64,7 @@ struct PrepToolbarView: View {
                     }
                 } label: {
                     // eligibility reference
-                    Text("✨ Launch Magic Missile! ✨")
+                    Text("💫 Launch Magic Missile 💫")
                         .font(.title3)
                         .multilineTextAlignment(.center)
                         .fontWeight(.bold)
@@ -204,7 +204,7 @@ struct ActionToolbarView: View {
                     .foregroundColor(.primary)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .padding(.trailing, 55)
+                    .padding(.trailing, 60)
                 Spacer()
             }
             HStack {
@@ -215,10 +215,9 @@ struct ActionToolbarView: View {
                     Image(systemName: "bolt.circle")
                         .font(.system(size: 60))
                         .foregroundStyle(.primary)
-                        .padding(.trailing, 20)
                 }
             }
-            .padding(.bottom, 23)
+            .padding(.bottom, 4)
         }
         .ignoresSafeArea()
         .padding([.top, .horizontal])
@@ -228,12 +227,18 @@ struct ActionToolbarView: View {
 
 
 #Preview {
-    @Previewable @State var test: CLLocationCoordinate2D? = nil
+    @Previewable @State var testLocation: CLLocationCoordinate2D? = nil
     @Previewable @State var gameManager = GameManager()
+    
     NavigationStack {
         VStack {
             Spacer()
-            ToolbarView(gameManager: $gameManager, pinLocation: $test, missileLocation: $test, shieldLocation: $test)
+            ToolbarView(
+                gameManager: $gameManager,
+                pinLocation: $testLocation,
+                missileLocation: $testLocation,
+                shieldLocation: $testLocation
+            )
         }
     }
 }
