@@ -26,6 +26,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0DC6D9CA2CD68E3A00E6DB78 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		0DD718652CD6A4E100E1E781 /* Onboarding View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Onboarding View"; sourceTree = "<group>"; };
+		A65A62D22CD715E900E1DA69 /* Controllers */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Controllers; sourceTree = "<group>"; };
 		FE8333832CD7084F00A0F706 /* Game View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Game View"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -59,6 +60,7 @@
 		FE1681F22CD68D2A00B6367C /* MissileGame */ = {
 			isa = PBXGroup;
 			children = (
+				A65A62D22CD715E900E1DA69 /* Controllers */,
 				FE1681F92CD68D2B00B6367C /* Preview Content */,
 				FE1681F72CD68D2B00B6367C /* Assets.xcassets */,
 				0DD718602CD69B0400E1E781 /* MissileGame.entitlements */,
@@ -98,6 +100,7 @@
 			fileSystemSynchronizedGroups = (
 				0DC6D9CA2CD68E3A00E6DB78 /* Shared */,
 				0DD718652CD6A4E100E1E781 /* Onboarding View */,
+				A65A62D22CD715E900E1DA69 /* Controllers */,
 				FE8333832CD7084F00A0F706 /* Game View */,
 			);
 			name = MissileGame;

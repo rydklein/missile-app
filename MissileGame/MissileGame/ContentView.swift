@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var notificationsEnabled = false
+    @State var gameManager = GameManager()
     var body: some View {
         NavigationStack {
             switch LocationManager.shared.locationAccess {
@@ -28,7 +29,7 @@ struct ContentView: View {
                 notificationsEnabled = (notificationSettings.authorizationStatus == .authorized)
             })
         }
-                }
+    }
 }
 
 #Preview {
