@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DangerNotificationView: View {
     @State private var timeRemaining: Double = 60.0
+    @Binding var gameManager: GameManager
     
     var body: some View {
         VStack {
@@ -53,11 +54,12 @@ struct DangerNotificationView: View {
             } else {
                 timeRemaining = 0
                 timer.invalidate()
+                gameManager.incomingMissile = nil
             }
         }
     }
 }
 
-#Preview {
-    DangerNotificationView()
-}
+//#Preview {
+   // DangerNotificationView()
+//}

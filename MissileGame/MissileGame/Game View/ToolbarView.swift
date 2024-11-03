@@ -17,7 +17,7 @@ struct ToolbarView: View {
     var body: some View{
 //        Group {
             if gameManager.incomingMissile != nil {
-                DangerNotificationView()
+                DangerNotificationView(gameManager: $gameManager)
             } else {
                 switch placeMode {
                 case .prep:

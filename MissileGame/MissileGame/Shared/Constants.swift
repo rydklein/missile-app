@@ -8,7 +8,7 @@ import Foundation
 
 class Constants {
     // Missile radius in meters
-    public static let MISSILE_RADIUS = 33.0
+    public static let MISSILE_RADIUS = 99.0
     // Root URL
     public static let WEB_ROOT_URL = "https://missilegame.ryderklein.com"
 //    public static let WEB_ROOT_URL = "http://localhost:3000"
