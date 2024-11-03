@@ -45,6 +45,7 @@ struct PrepToolbarView: View {
                     placeMode = .place
                 }
             } label: {
+                // eligibility reference
                 Text("✨ Cast Spells ✨")
                     .font(.title3)
                     .multilineTextAlignment(.center)
