@@ -36,9 +36,7 @@ struct MapView: View {
                     Map(initialPosition: .userLocation(fallback: region), interactionModes: [.all], scope: mapScope)
                     {
                         UserAnnotation()
-                        if (missileLocation.longitude == 00 || shieldLocation.longitude == 00) {
-                            MapCircle(center: pinLocation, radius: 200)
-                        }
+                        MapCircle(center: pinLocation, radius: 200)
                         
                         if (missileLocation.longitude != 00) {
                             MapCircle(center: missileLocation, radius: 200)
