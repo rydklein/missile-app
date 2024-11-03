@@ -115,6 +115,7 @@ struct PlaceToolbarView: View {
                 Button {
                     print("Missile button pressed")
                     missileLocation = pinLocation
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 } label: {
                     Image(systemName: "bolt.horizontal.fill")
                         .font(.title)
@@ -124,6 +125,7 @@ struct PlaceToolbarView: View {
                 Button {
                     print("Shield button pressed")
                     shieldLocation = pinLocation
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 } label: {
                     Image(systemName: "bolt.shield")
                         .font(.title)
