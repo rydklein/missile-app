@@ -14,7 +14,7 @@ model User {
   name             String?
   health            Int            @default(3)
   ownedObjects     Object[]       @relation("UserObjects")
-  missileRanges    MissileRange[] // Relation to track missile range status for each user
+  objectRanges ObjectRange[] // Relation to track missile range status for each user
 }
 
 model Object {
@@ -26,16 +26,16 @@ model Object {
   inFlight       Boolean        @default(false)
   owner          User           @relation("UserObjects", fields: [ownerId], references: [id])
   ownerId        Int
-  missileRanges  MissileRange[] // Relation to track range status with users
+  objectRanges ObjectRange[] // Relation to track range status with users
 }
 
-model MissileRange {
+model ObjectRange {
   id         Int     @id @default(autoincrement())
   user       User    @relation(fields: [userId], references: [id])
   userId     Int
-  missile    Object  @relation(fields: [missileId], references: [id])
-  missileId  Int
+  object    Object  @relation(fields: [objectId], references: [id])
+  objectId  Int
   inRange    Boolean // Indicates if user is in range of missile
 
-  @@unique([userId, missileId]) // Unique constraint for each user-missile pair
+  @@unique([userId, objectId]) // Unique constraint for each user-missile pair
 }

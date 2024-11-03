@@ -1,11 +1,9 @@
 import apn from '@parse/node-apn'
-import cron from 'node-cron';
 import dotenv from 'dotenv'
 import { PrismaClient } from '@prisma/client'
 
 dotenv.config()
 const prisma = new PrismaClient()
-
 
 const options: apn.ProviderOptions = {
   token: {
@@ -17,14 +15,6 @@ const options: apn.ProviderOptions = {
 };
 
 const apnProvider = new apn.Provider(options);
-
-export const startDailyMissileNotification = () => {
-    cron.schedule('0 9 * * *', async () => {
-      await sendActionNotification()
-    }, {
-      timezone: 'America/New_York',
-    })
-  }
 
 async function sendActionNotification() {
     const notification = new apn.Notification()
@@ -58,24 +48,24 @@ export async function sendMissileNotification(usersInRange: number[]) {
             select: { id: true, device_token: true }
         })
 
-        // const inRangeUsers = allUsers.filter(user => usersInRange.includes(user.id))
-        // const outOfRangeUsers = allUsers.filter(user => !usersInRange.includes(user.id))
-        const inRangeUsers = allUsers
+        const inRangeUsers = allUsers.filter(user => usersInRange.includes(user.id))
+        const outOfRangeUsers = allUsers.filter(user => !usersInRange.includes(user.id))
+
         const inRangeNotification = new apn.Notification()
         inRangeNotification.topic = process.env.APP_BUNDLE!
-        inRangeNotification.alert = "Missile alert! You are in range!"
+        inRangeNotification.alert = "Someone launched a magic missile, but not to worry -- you're safe."
         inRangeNotification.payload = { updateType: "missileInRange" }
 
         const outOfRangeNotification = new apn.Notification()
         outOfRangeNotification.topic = process.env.APP_BUNDLE!
-        outOfRangeNotification.alert = "Missile update! You are not in range."
+        outOfRangeNotification.alert = "Someone launched a magic missile -- you're in the blast zone!"
         outOfRangeNotification.payload = { updateType: "missileOutOfRange" }
 
         const inRangeDeviceTokens = inRangeUsers.map(user => user.device_token)
         await apnProvider.send(inRangeNotification, inRangeDeviceTokens)
 
-        //const outOfRangeDeviceTokens = outOfRangeUsers.map(user => user.device_token)
-        //await apnProvider.send(outOfRangeNotification, outOfRangeDeviceTokens)
+        const outOfRangeDeviceTokens = outOfRangeUsers.map(user => user.device_token)
+        await apnProvider.send(outOfRangeNotification, outOfRangeDeviceTokens)
 
     } catch (error) {
         console.error("Error fetching device tokens or sending notifications:", error)
