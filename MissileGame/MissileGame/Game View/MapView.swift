@@ -11,6 +11,7 @@ import SwiftUI
 struct MapView: View {
     @State var gameManager = GameManager()
     @State private var pinLocation: CLLocationCoordinate2D? = nil
+    @Environment(\.colorScheme) var colorScheme
     @Namespace var mapScope
     var body: some View {
         VStack(spacing: .zero) {
@@ -45,7 +46,7 @@ struct MapView: View {
                 LinearGradient(gradient: Gradient(colors: [.purple, .white, .blue]),
                                startPoint: .top,
                                endPoint: .bottom)
-                    .opacity(0.3)
+                .opacity(colorScheme == .light ? 0.3 : 0.15)
                     .edgesIgnoringSafeArea(.all)
                     .allowsHitTesting(false)
             }
