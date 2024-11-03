@@ -35,6 +35,13 @@ struct SettingsView: View {
                     Text("Kill Missile")
                 }
             }
+            if (gameManager.gameState == .action) {
+                Button(action: {
+                    gameManager.activateShield()
+                }) {
+                    Text("Activate Shield")
+                }
+            }
             Text("Health: \(gameManager.healthPoints)")
             Button("Subtract Health") {
                 gameManager.healthPoints -= 1

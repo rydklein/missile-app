@@ -16,6 +16,7 @@ class GameManager {
     public var myShieldLocation: CLLocationCoordinate2D?
     public var healthPoints: Int = 3
     public var incomingMissile: IncomingMissile?
+    public var activeShield: Shield?
     public var gameState: GameState = .planning
     
     public func launchMissile() {
@@ -31,11 +32,21 @@ class GameManager {
     public func placeShield(lat: Double, long: Double) {
         myShieldLocation = CLLocationCoordinate2D(latitude: lat, longitude: long)
     }
+    
+    public func activateShield() {
+        if let location = myShieldLocation {
+            activeShield = Shield(location: location)
+        }
+    }
 }
 
 struct IncomingMissile {
     var location: CLLocationCoordinate2D
     var arrivalTime: Date
+}
+
+struct Shield {
+    var location: CLLocationCoordinate2D
 }
 
 enum GameState: String {
