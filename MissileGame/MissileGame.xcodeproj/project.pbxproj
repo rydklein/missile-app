@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3729F5392CD6B790003EFE7E /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729F5382CD6B790003EFE7E /* ToolbarView.swift */; };
-		3729F55F2CD6C9D3003EFE7E /* PhaseTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729F55E2CD6C9D3003EFE7E /* PhaseTimeView.swift */; };
-		3729F5612CD6CECB003EFE7E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3729F5602CD6CECB003EFE7E /* SettingsView.swift */; };
-		A652AB6F2CD6D19C0034D16C /* LobbyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652AB6E2CD6D19C0034D16C /* LobbyView.swift */; };
-		A6F60B272CD6AB420010C7BB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F60B262CD6AB420010C7BB /* MapView.swift */; };
 		FE1681F42CD68D2A00B6367C /* MissileGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */; };
 		FE1681F62CD68D2A00B6367C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1681F52CD68D2A00B6367C /* ContentView.swift */; };
 		FE1681F82CD68D2B00B6367C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1681F72CD68D2B00B6367C /* Assets.xcassets */; };
@@ -21,11 +16,6 @@
 /* Begin PBXFileReference section */
 		0DD7185F2CD69ABB00E1E781 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0DD718602CD69B0400E1E781 /* MissileGame.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MissileGame.entitlements; sourceTree = "<group>"; };
-		3729F5382CD6B790003EFE7E /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
-		3729F55E2CD6C9D3003EFE7E /* PhaseTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseTimeView.swift; sourceTree = "<group>"; };
-		3729F5602CD6CECB003EFE7E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		A652AB6E2CD6D19C0034D16C /* LobbyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyView.swift; sourceTree = "<group>"; };
-		A6F60B262CD6AB420010C7BB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		FE1681F02CD68D2A00B6367C /* MissileGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MissileGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissileGameApp.swift; sourceTree = "<group>"; };
 		FE1681F52CD68D2A00B6367C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +26,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0DC6D9CA2CD68E3A00E6DB78 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		0DD718652CD6A4E100E1E781 /* Onboarding View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Onboarding View"; sourceTree = "<group>"; };
+		FE8333832CD7084F00A0F706 /* Game View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Game View"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +65,7 @@
 				0DD7185F2CD69ABB00E1E781 /* Info.plist */,
 				FE1681F32CD68D2A00B6367C /* MissileGameApp.swift */,
 				FE1681F52CD68D2A00B6367C /* ContentView.swift */,
-				FE4177B02CD6C4EB0036F8C0 /* Gameplay */,
+				FE8333832CD7084F00A0F706 /* Game View */,
 				0DD718652CD6A4E100E1E781 /* Onboarding View */,
 				0DC6D9CA2CD68E3A00E6DB78 /* Shared */,
 			);
@@ -87,18 +78,6 @@
 				FE1681FA2CD68D2B00B6367C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		FE4177B02CD6C4EB0036F8C0 /* Gameplay */ = {
-			isa = PBXGroup;
-			children = (
-				A6F60B262CD6AB420010C7BB /* MapView.swift */,
-				3729F5382CD6B790003EFE7E /* ToolbarView.swift */,
-				3729F55E2CD6C9D3003EFE7E /* PhaseTimeView.swift */,
-				3729F5602CD6CECB003EFE7E /* SettingsView.swift */,
-				A652AB6E2CD6D19C0034D16C /* LobbyView.swift */,
-			);
-			path = Gameplay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +98,7 @@
 			fileSystemSynchronizedGroups = (
 				0DC6D9CA2CD68E3A00E6DB78 /* Shared */,
 				0DD718652CD6A4E100E1E781 /* Onboarding View */,
+				FE8333832CD7084F00A0F706 /* Game View */,
 			);
 			name = MissileGame;
 			productName = MissileGame;
@@ -177,13 +157,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6F60B272CD6AB420010C7BB /* MapView.swift in Sources */,
 				FE1681F62CD68D2A00B6367C /* ContentView.swift in Sources */,
-				3729F55F2CD6C9D3003EFE7E /* PhaseTimeView.swift in Sources */,
 				FE1681F42CD68D2A00B6367C /* MissileGameApp.swift in Sources */,
-				A652AB6F2CD6D19C0034D16C /* LobbyView.swift in Sources */,
-				3729F5612CD6CECB003EFE7E /* SettingsView.swift in Sources */,
-				3729F5392CD6B790003EFE7E /* ToolbarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
