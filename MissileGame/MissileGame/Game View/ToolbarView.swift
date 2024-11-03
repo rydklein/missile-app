@@ -4,17 +4,17 @@
 //
 //  Created by asimraja on 11/2/24.
 //
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct ToolbarView: View {
     @State public var placeMode = false
     @Binding public var pinLocation: CLLocationCoordinate2D
     @Binding public var missileLocation: CLLocationCoordinate2D
     @Binding public var shieldLocation: CLLocationCoordinate2D
-    var body: some View{
+    var body: some View {
         Group {
-            switch placeMode{
+            switch placeMode {
             case false:
                 PrepToolbarView(placeMode: $placeMode)
             case true:
@@ -28,59 +28,52 @@ struct ToolbarView: View {
 struct PrepToolbarView: View {
     @Binding var placeMode: Bool
     var body: some View {
-        HStack {
-            Spacer()
+        VStack {
             Button {
                 withAnimation {
                     placeMode = true
                 }
             } label: {
-//                Rectangle()
-//                    .fill(Color.red)
-//                    .frame(width: 90, height: 90)
-//                    .cornerRadius(20)
-//                    .overlay(alignment: .center) {
-//                        Text("Prepare")
-//                            .fontWeight(.semibold)
-//                            .foregroundStyle(.white)
-//                    }
-                Text("Prepare")
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 35)
-                    .background(.blue, in: .rect(cornerRadius: 20))
+                Text("✨ Cast Spells ✨")
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(.blue, in: RoundedRectangle(cornerRadius: 23))
             }
-            .padding()
-            Spacer()
-
-            // Will have to be adjusted for player lives
-            ForEach(0 ..< 3) { _ in
-                Image(systemName: "heart.fill")
-                    .foregroundStyle(.purple)
-                    .font(.title)
+            
+            HStack {
+                Button {
+                    print("Lobby pressed")
+                } label: {
+                    Image(systemName: "person.2.circle.fill")
+                        .font(.title)
+                }
+                
+                Spacer()
+                
+                ForEach(0 ..< 3) { _ in
+                    Image(systemName: "heart.fill")
+                        .foregroundStyle(.purple)
+                        .font(.title)
+                }
+                .padding(.vertical, 16)
+                
+                Spacer()
+                
+                NavigationLink {
+                    SettingsView()
+                } label: {
+                    Image(systemName: "gear.circle.fill")
+                        .font(.title)
+                }
+                
+                
             }
-//            Spacer()
-//            Spacer()
-//            VStack {
-//                Button {
-//                    print("Lobby pressed")
-//                } label: {
-//                    Image(systemName: "person.3.fill")
-//                        .font(.title2)
-//                }
-//                .padding(.vertical, 10)
-//
-//                NavigationLink {
-//                    SettingsView()
-//                } label: {
-//                    Image(systemName: "gearshape.fill")
-//                        .font(.title2)
-//                }
-//                .padding(.vertical, 10)
-//            }
-            Spacer()
         }
+        .padding(16)
         .ignoresSafeArea()
         .background(.regularMaterial)
     }
@@ -92,7 +85,6 @@ struct PlaceToolbarView: View {
     @Binding public var missileLocation: CLLocationCoordinate2D
     @Binding public var shieldLocation: CLLocationCoordinate2D
     var body: some View {
-
         VStack {
             HStack {
                 Button {
@@ -102,51 +94,55 @@ struct PlaceToolbarView: View {
                 } label: {
                     Image(systemName: "chevron.backward")
                     Text("Back")
-                    
                 }
                 Spacer()
-                Text("Cast your spell")
-                    .padding(.leading, 10)
-                Spacer()
+                Text("Select a Spell:")
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .padding(.trailing, 55)
                 Spacer()
             }
             HStack {
-                Spacer()
                 Button {
                     print("Missile button pressed")
                     missileLocation = pinLocation
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 } label: {
-                    Image(systemName: "bolt.horizontal.fill")
-                        .font(.title)
+                    Image(systemName: "bolt.circle")
+                        .font(.system(size: 45))
                         .foregroundStyle(.primary)
+                        .padding(.trailing, 20)
                 }
-                Spacer()
+                
                 Button {
                     print("Shield button pressed")
                     shieldLocation = pinLocation
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 } label: {
-                    Image(systemName: "bolt.shield")
-                        .font(.title)
+                    Image(systemName: "shield.righthalf.filled")
+                        .font(.system(size: 45))
                         .foregroundStyle(.primary)
+                        .padding(.leading, 20)
                 }
-                Spacer()
             }
-            .padding()
+            .padding(.bottom, 23)
         }
         .ignoresSafeArea()
         .padding([.top, .horizontal])
-        .padding(.bottom, 12)
         .background(.regularMaterial)
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        VStack {
-//            Spacer()
-//            ToolbarView(pinLocation: LocationManager.shared.userLocation?.coordinate)
-//        }
-//    }
-//}
+#Preview {
+    @Previewable @State var test: CLLocationCoordinate2D = CLLocationCoordinate2D()
+    NavigationStack {
+        VStack {
+            Spacer()
+            ToolbarView(pinLocation: $test, missileLocation: $test, shieldLocation: $test)
+        }
+    }
+}
