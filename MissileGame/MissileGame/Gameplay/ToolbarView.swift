@@ -9,14 +9,16 @@ import MapKit
 
 struct ToolbarView: View {
     @State public var placeMode = false
-    @Binding public var pinLocation: CLLocationCoordinate2D?
+    @Binding public var pinLocation: CLLocationCoordinate2D
+    @Binding public var missileLocation: CLLocationCoordinate2D
+    @Binding public var shieldLocation: CLLocationCoordinate2D
     var body: some View{
         Group {
             switch placeMode{
             case false:
                 PrepToolbarView(placeMode: $placeMode)
             case true:
-                PlaceToolbarView(placeMode: $placeMode, pinLocation: $pinLocation)
+                PlaceToolbarView(placeMode: $placeMode, pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
             }
         }
         .transition(.move(edge: !placeMode ? .leading : .trailing))
@@ -86,7 +88,9 @@ struct PrepToolbarView: View {
 
 struct PlaceToolbarView: View {
     @Binding var placeMode: Bool
-    @Binding var pinLocation: CLLocationCoordinate2D?
+    @Binding var pinLocation: CLLocationCoordinate2D
+    @Binding public var missileLocation: CLLocationCoordinate2D
+    @Binding public var shieldLocation: CLLocationCoordinate2D
     var body: some View {
 
         VStack {
@@ -110,6 +114,7 @@ struct PlaceToolbarView: View {
                 Spacer()
                 Button {
                     print("Missile button pressed")
+                    missileLocation = pinLocation
                 } label: {
                     Image(systemName: "bolt.horizontal.fill")
                         .font(.title)
@@ -118,6 +123,7 @@ struct PlaceToolbarView: View {
                 Spacer()
                 Button {
                     print("Shield button pressed")
+                    shieldLocation = pinLocation
                 } label: {
                     Image(systemName: "bolt.shield")
                         .font(.title)

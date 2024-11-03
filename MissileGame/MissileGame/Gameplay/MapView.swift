@@ -8,6 +8,11 @@
 import MapKit
 import SwiftUI
 
+let defaultCoord = CLLocationCoordinate2D(
+    latitude: 00,
+    longitude: 00)
+
+
 struct MapView: View {
     private let region: MapCameraPosition = .region(MKCoordinateRegion(
         center: CLLocationCoordinate2D(
@@ -20,22 +25,40 @@ struct MapView: View {
         )
     )
     )
-    @State private var pinLocation = LocationManager.shared.userLocation?.coordinate
+    @State private var pinLocation = LocationManager.shared.userLocation?.coordinate ?? defaultCoord
+    @State public var missileLocation = LocationManager.shared.userLocation?.coordinate ?? defaultCoord
+    @State public var shieldLocation = LocationManager.shared.userLocation?.coordinate ?? defaultCoord
     @Namespace var mapScope
     var body: some View {
         VStack(spacing: .zero) {
             ZStack {
                 MapReader { reader in
-                    Map(initialPosition: .userLocation(fallback: region), interactionModes: [.all], scope: mapScope) {
+                    Map(initialPosition: .userLocation(fallback: region), interactionModes: [.all], scope: mapScope)
+                    {
                         UserAnnotation()
+                        if (missileLocation.longitude == 00 || shieldLocation.longitude == 00) {
+                            MapCircle(center: pinLocation, radius: 200)
+                        }
+                        
+                        if (missileLocation.longitude != 00) {
+                            MapCircle(center: missileLocation, radius: 200)
+                                .foregroundStyle(.red)
+                        }
+                        if (shieldLocation.longitude != 00) {
+                            MapCircle(center: shieldLocation, radius: 200)
+                                .foregroundStyle(.blue)
+                        }
                     }
                     .onTapGesture(perform: { screenCoord in
-                        pinLocation = reader.convert(screenCoord, from: .local)
+                        pinLocation = reader.convert(screenCoord, from: .local) ?? CLLocationCoordinate2D(
+                            latitude: LocationManager.shared.userLocation?.coordinate.latitude ?? 00,
+                            longitude: LocationManager.shared.userLocation?.coordinate.longitude ?? 00)
                         print(pinLocation)
                     })
                     .mapControls {
                         MapUserLocationButton(scope: mapScope)
                     }
+                
                 }
                 LinearGradient(gradient: Gradient(colors: [.purple, .white, .blue]),
                                startPoint: .top,
@@ -45,7 +68,7 @@ struct MapView: View {
                     .allowsHitTesting(false)
             }
             
-            ToolbarView(pinLocation: $pinLocation)
+            ToolbarView(pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
         }
         .mapScope(mapScope)
     }
