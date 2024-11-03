@@ -8,16 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var notificationsEnabled = false
     var body: some View {
         NavigationStack {
             switch LocationManager.shared.locationAccess {
             case .unknown, .denied, .inUse:
                 RequestLocationAccessView()
             case .always:
-                MapView()
+                if (!notificationsEnabled) {
+                    RequestNotificationAccessView(canSeeNotifications: $notificationsEnabled)
+                } else {
+                    MapView()
+                }
             }
         }
-    }
+        .onAppear {
+            let center = UNUserNotificationCenter.current()
+            center.getNotificationSettings(completionHandler: {notificationSettings in
+                notificationsEnabled = (notificationSettings.authorizationStatus == .authorized)
+            })
+        }
+                }
 }
 
 #Preview {

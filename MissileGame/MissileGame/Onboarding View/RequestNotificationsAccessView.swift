@@ -5,17 +5,10 @@
 //  Created by asimraja on 11/2/24.
 //
 
-//let center = UNUserNotificationCenter.current()
-//center.requestAuthorization(options: [.sound, .alert, .badge]) { _, _ in
-//}
-//center.getNotificationSettings(completionHandler: {notificationSettings in
-//    notificationSettings.authorizationStatus
-//})
-
 import SwiftUI
 
 struct RequestNotificationAccessView: View {
-    @State public var notifAccessPermissions = false
+    @Binding public var canSeeNotifications: Bool
     var body: some View {
         Image(systemName: "exclamationmark.bubble.fill")
             .resizable()
@@ -28,16 +21,20 @@ struct RequestNotificationAccessView: View {
             .padding()
         
         Button("Grant permission") {
-            
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.sound, .alert, .badge]) { isEnabled, _ in
+                canSeeNotifications = isEnabled
+            }
         }
     }
 }
 
 
 #Preview {
+    @Previewable @State var test = false
     NavigationStack {
         VStack {
-            RequestNotificationAccessView()
+            RequestNotificationAccessView(canSeeNotifications: $test)
         }
     }
 }
