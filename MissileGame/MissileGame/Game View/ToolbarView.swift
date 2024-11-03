@@ -60,25 +60,25 @@ struct PrepToolbarView: View {
                     .foregroundStyle(.purple)
                     .font(.title)
             }
-            Spacer()
-            Spacer()
-            VStack {
-                Button {
-                    print("Lobby pressed")
-                } label: {
-                    Image(systemName: "person.3.fill")
-                        .font(.title2)
-                }
-                .padding(.vertical, 10)
-
-                NavigationLink {
-                    SettingsView()
-                } label: {
-                    Image(systemName: "gearshape.fill")
-                        .font(.title2)
-                }
-                .padding(.vertical, 10)
-            }
+//            Spacer()
+//            Spacer()
+//            VStack {
+//                Button {
+//                    print("Lobby pressed")
+//                } label: {
+//                    Image(systemName: "person.3.fill")
+//                        .font(.title2)
+//                }
+//                .padding(.vertical, 10)
+//
+//                NavigationLink {
+//                    SettingsView()
+//                } label: {
+//                    Image(systemName: "gearshape.fill")
+//                        .font(.title2)
+//                }
+//                .padding(.vertical, 10)
+//            }
             Spacer()
         }
         .ignoresSafeArea()
