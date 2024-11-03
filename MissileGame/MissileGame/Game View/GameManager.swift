@@ -36,7 +36,7 @@ struct IncomingMissile {
     var arrivalTime: Date
 }
 
-enum GameState {
+enum GameState: String {
     case planning
     case action
 }

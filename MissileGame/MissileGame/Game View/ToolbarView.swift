@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ToolbarView: View {
     @State public var placeMode = false
+    // Whatever man. You can have two sources of truth. I don't care anymore
+    @Binding public var gameManager: GameManager
     @Binding public var pinLocation: CLLocationCoordinate2D?
     @Binding public var missileLocation: CLLocationCoordinate2D?
     @Binding public var shieldLocation: CLLocationCoordinate2D?
@@ -16,7 +18,7 @@ struct ToolbarView: View {
         Group {
             switch placeMode {
             case false:
-                PrepToolbarView(placeMode: $placeMode)
+                PrepToolbarView(placeMode: $placeMode, gameManager: $gameManager)
             case true:
                 PlaceToolbarView(placeMode: $placeMode, pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
             }
@@ -27,6 +29,7 @@ struct ToolbarView: View {
 
 struct PrepToolbarView: View {
     @Binding var placeMode: Bool
+    @Binding var gameManager: GameManager
     var body: some View {
         VStack {
             Button {
@@ -54,17 +57,26 @@ struct PrepToolbarView: View {
                 
                 Spacer()
                 
-                ForEach(0 ..< 3) { _ in
+                Group {
                     Image(systemName: "heart.fill")
                         .foregroundStyle(.purple)
                         .font(.title)
+                        .opacity(gameManager.healthPoints >= 1 ? 1 : 0)
+                    Image(systemName: "heart.fill")
+                        .foregroundStyle(.purple)
+                        .font(.title)
+                        .opacity(gameManager.healthPoints >= 2 ? 1 : 0)
+                    Image(systemName: "heart.fill")
+                        .foregroundStyle(.purple)
+                        .font(.title)
+                        .opacity(gameManager.healthPoints >= 3 ? 1 : 0)
                 }
                 .padding(.vertical, 16)
                 
                 Spacer()
                 
                 NavigationLink {
-                    SettingsView()
+                    SettingsView(gameManager: $gameManager)
                 } label: {
                     Image(systemName: "gear.circle.fill")
                         .font(.title)
@@ -145,10 +157,11 @@ struct PlaceToolbarView: View {
 
 #Preview {
     @Previewable @State var test: CLLocationCoordinate2D? = nil
+    @Previewable @State var gameManager = GameManager()
     NavigationStack {
         VStack {
             Spacer()
-            ToolbarView(pinLocation: $test, missileLocation: $test, shieldLocation: $test)
+            ToolbarView(gameManager: $gameManager, pinLocation: $test, missileLocation: $test, shieldLocation: $test)
         }
     }
 }

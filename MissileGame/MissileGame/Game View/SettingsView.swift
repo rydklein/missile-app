@@ -8,25 +8,49 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
+    @Binding var gameManager: GameManager
     @State private var playerName: String = ""
     
     var body: some View {
         VStack {
-            Form {
-                Section(header: Text("Player name")) {
-                    TextField("Enter your name", text: $playerName)
+            HStack {
+                Text("Current Game State:")
+                Button(action: {
+                    gameManager.gameState = gameManager.gameState == .action ? .planning : .action
+                }) {
+                    Text(gameManager.gameState.rawValue)
                 }
             }
-            Text(playerName)
+            if let location = LocationManager.shared.userLocation?.coordinate {
+                Button(action: {
+                    gameManager.incomingMissile = IncomingMissile(location: location, arrivalTime: .init(timeIntervalSinceNow: 60)
+                    )}) {
+                        Text("Call Missile")
+                    }
+            }
+            if gameManager.incomingMissile != nil {
+                Button(action: {
+                    gameManager.incomingMissile = nil
+                }) {
+                    Text("Kill Missile")
+                }
+            }
+            Text("Health: \(gameManager.healthPoints)")
+            Button("Subtract Health") {
+                gameManager.healthPoints -= 1
+            }
+            Button("Reset Health") {
+                gameManager.healthPoints = 3
+            }
         }
-        .navigationTitle("Settings")
+        .navigationTitle("Dev Tools")
         .navigationBarTitleDisplayMode(.large)
     }
 }
 
 #Preview {
+    @Previewable @State var gameManager = GameManager()
     NavigationStack {
-        SettingsView()
+        SettingsView(gameManager: $gameManager)
     }
 }

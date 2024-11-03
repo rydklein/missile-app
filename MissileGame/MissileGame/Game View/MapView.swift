@@ -36,7 +36,6 @@ struct MapView: View {
                         pinLocation = reader.convert(screenCoord, from: .local) ?? CLLocationCoordinate2D(
                             latitude: LocationManager.shared.userLocation?.coordinate.latitude ?? 00,
                             longitude: LocationManager.shared.userLocation?.coordinate.longitude ?? 00)
-                        print(pinLocation)
                     })
                     .mapControls {
                         MapUserLocationButton(scope: mapScope)
@@ -51,9 +50,10 @@ struct MapView: View {
                     .allowsHitTesting(false)
             }
             
-            ToolbarView(pinLocation: $pinLocation, missileLocation: $gameManager.myMissileLocation, shieldLocation: $gameManager.myShieldLocation)
+            ToolbarView(gameManager: $gameManager, pinLocation: $pinLocation, missileLocation: $gameManager.myMissileLocation, shieldLocation: $gameManager.myShieldLocation)
         }
         .mapScope(mapScope)
+        .navigationTitle("Magic Missiles")
     }
 }
 
