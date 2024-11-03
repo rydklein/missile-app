@@ -1,17 +1,17 @@
-import { Router, Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { Router, Request, Response } from "express"
+import { PrismaClient } from "@prisma/client"
 
-const router = Router();
-const prisma = new PrismaClient();
+const router = Router()
+const prisma = new PrismaClient()
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
-    const users = await prisma.user.findMany();
-    res.status(200).json(users);
+    const users = await prisma.user.findMany()
+    res.status(200).json(users)
   } catch (error) {
-    res.status(500).json({ error: "Error fetching posts" });
+    res.status(500).json({ error: "Error fetching posts" })
   }
-});
+})
 
   router.post('/', async (req: Request, res: Response) => {
     const { deviceIdentifier, deviceToken, userName } = req.body

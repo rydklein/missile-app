@@ -9,9 +9,9 @@ const prisma = new PrismaClient()
 
 const options: apn.ProviderOptions = {
   token: {
-    key: "./path",
-    keyId: "YOUR_KEY_ID",
-    teamId: "YOUR_TEAM_ID",
+    key: "./key.p8",
+    keyId: process.env.KEY_ID!,
+    teamId: process.env.TEAM_ID!,
   },
   production: false,
 };
@@ -52,21 +52,35 @@ async function sendActionNotification() {
     }
 }
 
-export async function sendMissileNotification( usersInRange ){
+export async function sendMissileNotification(usersInRange: number[]) {
     try {
-        const inRangeUser = await prisma.user.findMany({
-            where: {
-                id: { in: usersInRange },
-            },
+        const allUsers = await prisma.user.findMany({
+            select: { id: true, device_token: true }
         })
 
+        // const inRangeUsers = allUsers.filter(user => usersInRange.includes(user.id))
+        // const outOfRangeUsers = allUsers.filter(user => !usersInRange.includes(user.id))
+        const inRangeUsers = allUsers
+        const inRangeNotification = new apn.Notification()
+        inRangeNotification.topic = process.env.APP_BUNDLE!
+        inRangeNotification.alert = "Missile alert! You are in range!"
+        inRangeNotification.payload = { updateType: "missileInRange" }
+
+        const outOfRangeNotification = new apn.Notification()
+        outOfRangeNotification.topic = process.env.APP_BUNDLE!
+        outOfRangeNotification.alert = "Missile update! You are not in range."
+        outOfRangeNotification.payload = { updateType: "missileOutOfRange" }
+
+        const inRangeDeviceTokens = inRangeUsers.map(user => user.device_token)
+        await apnProvider.send(inRangeNotification, inRangeDeviceTokens)
+
+        //const outOfRangeDeviceTokens = outOfRangeUsers.map(user => user.device_token)
+        //await apnProvider.send(outOfRangeNotification, outOfRangeDeviceTokens)
 
     } catch (error) {
-        console.error("Error fetching device tokens or sending notification:", error)
+        console.error("Error fetching device tokens or sending notifications:", error)
     }
 }
-
-
 
 
 process.on('exit', () => {

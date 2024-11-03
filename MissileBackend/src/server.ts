@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import userRoutes from './routes/userRoutes'
 import missilesRoutes from './routes/missileRoutes'
 import { PrismaClient } from '@prisma/client'
+import { sendMissileNotification } from './notiService'
 
 dotenv.config()
 const app = express()
@@ -14,6 +15,7 @@ app.use('/missiles', missilesRoutes);
 
 
 app.get('/', (req: Request, res: Response) => {
+  sendMissileNotification([1])
   res.send('Hello World!')
 })
 

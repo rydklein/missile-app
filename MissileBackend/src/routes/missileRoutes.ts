@@ -19,6 +19,34 @@ router.get('/', async (req: Request, res: Response) => {
     }
   })
 
+  router.get('/:user_id', async (req: Request, res: Response) => { 
+    const { user_id } = req.params 
+    try {
+      const missiles = await prisma.object.findMany({
+        where: {
+          ownerId: Number(user_id),
+        },
+      })
+      res.status(200).json(missiles)
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching missiles' })
+    }
+  })
+
+  router.get('/active', async (req: Request, res: Response) => {  
+    try {
+      const missiles = await prisma.object.findMany({
+        where: {
+          type: 'missile',
+          inFlight: true
+        },
+      })
+      res.status(200).json(missiles)
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching missiles' })
+    }
+  })
+
   
   router.post('/', async (req: Request, res: Response) => {
     const { lat, long, ownerId } = req.body
@@ -82,7 +110,7 @@ router.get('/', async (req: Request, res: Response) => {
     try {
         const updateData: any = {}
 
-        if (isBetween10and6EST()) {
+        if (true) {
             updateData.launched = true
             const updatedMissile = await prisma.object.update({
                 where: { id: Number(missileId) },
@@ -102,12 +130,15 @@ router.get('/', async (req: Request, res: Response) => {
             // This code is run a minute after the missile is launched.
             // loop over all users attached to the missile. If they're in range, take 1 away from their health and set a flag to "hit" on that missile for that user
             setTimeout(async () => {
-                
-                  
-                  for(const range of ranges){
-                    if (range.inRange){
+                const hits = await prisma.missileRange.findMany({
+                    where: {
+                      missileId: Number(missileId),
+                    },
+                })
+                  for(const hit of hits){
+                    if (hit.inRange){
                         await prisma.user.update({
-                            where: { id: range.userId },
+                            where: { id: hit.userId },
                             data: { health: { decrement: 1 } },
                         })
                     }
@@ -118,7 +149,7 @@ router.get('/', async (req: Request, res: Response) => {
         else{
             res.status(400).json({ error: 'Cannot Launch During Planning' })
         }
-
+    
         
     } catch (error) {
         res.status(500).json({ error: 'Error updating missile' })

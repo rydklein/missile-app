@@ -23,6 +23,7 @@ model Object {
   long           Float
   type           String
   launched       Boolean        @default(false)
+  inFlight       Boolean        @default(false)
   owner          User           @relation("UserObjects", fields: [ownerId], references: [id])
   ownerId        Int
   missileRanges  MissileRange[] // Relation to track range status with users
