@@ -44,7 +44,8 @@ struct MapView: View {
                     .edgesIgnoringSafeArea(.all)
                     .allowsHitTesting(false)
             }
-            ToolbarView()
+            
+            ToolbarView(pinLocation: $pinLocation)
         }
         .mapScope(mapScope)
     }

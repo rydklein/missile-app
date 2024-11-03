@@ -5,16 +5,18 @@
 //  Created by asimraja on 11/2/24.
 //
 import SwiftUI
+import MapKit
 
 struct ToolbarView: View {
     @State public var placeMode = false
-    var body: some View {
+    @Binding public var pinLocation: CLLocationCoordinate2D?
+    var body: some View{
         Group {
-            switch placeMode {
+            switch placeMode{
             case false:
                 PrepToolbarView(placeMode: $placeMode)
             case true:
-                PlaceToolbarView(placeMode: $placeMode)
+                PlaceToolbarView(placeMode: $placeMode, pinLocation: $pinLocation)
             }
         }
         .transition(.move(edge: !placeMode ? .leading : .trailing))
@@ -84,6 +86,7 @@ struct PrepToolbarView: View {
 
 struct PlaceToolbarView: View {
     @Binding var placeMode: Bool
+    @Binding var pinLocation: CLLocationCoordinate2D?
     var body: some View {
 
         VStack {
@@ -131,11 +134,11 @@ struct PlaceToolbarView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        VStack {
-            Spacer()
-            ToolbarView()
-        }
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        VStack {
+//            Spacer()
+//            ToolbarView(pinLocation: LocationManager.shared.userLocation?.coordinate)
+//        }
+//    }
+//}
