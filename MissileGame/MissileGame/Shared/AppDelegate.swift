@@ -15,9 +15,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         application.registerForRemoteNotifications()
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.sound, .alert, .badge]) { _, _ in
-        }
 
         return true
     }
