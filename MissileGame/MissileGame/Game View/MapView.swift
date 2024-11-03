@@ -8,42 +8,26 @@
 import MapKit
 import SwiftUI
 
-let defaultCoord = CLLocationCoordinate2D(
-    latitude: 00,
-    longitude: 00)
-
-
 struct MapView: View {
-    private let region: MapCameraPosition = .region(MKCoordinateRegion(
-        center: CLLocationCoordinate2D(
-            latitude: LocationManager.shared.userLocation?.coordinate.latitude ?? 00,
-            longitude: LocationManager.shared.userLocation?.coordinate.longitude ?? 00
-        ),
-        span: MKCoordinateSpan(
-            latitudeDelta: 0.2,
-            longitudeDelta: 0.2
-        )
-    )
-    )
-    @State private var pinLocation = LocationManager.shared.userLocation?.coordinate ?? defaultCoord
-    @State public var missileLocation = LocationManager.shared.userLocation?.coordinate ?? defaultCoord
-    @State public var shieldLocation = LocationManager.shared.userLocation?.coordinate ?? defaultCoord
+    @State var gameManager = GameManager()
+    @State private var pinLocation: CLLocationCoordinate2D? = nil
     @Namespace var mapScope
     var body: some View {
         VStack(spacing: .zero) {
             ZStack {
                 MapReader { reader in
-                    Map(initialPosition: .userLocation(fallback: region), interactionModes: [.all], scope: mapScope)
+                    Map(initialPosition: MapCameraPosition.userLocation(fallback: .automatic), interactionModes: [.all], scope: mapScope)
                     {
                         UserAnnotation()
-                        MapCircle(center: pinLocation, radius: 200)
-                        
-                        if (missileLocation.longitude != 00) {
-                            MapCircle(center: missileLocation, radius: 200)
+                        if let pinLocation = pinLocation {
+                            MapCircle(center: pinLocation, radius: Constants.MISSILE_RADIUS)
+                        }
+                        if let missileLocation = gameManager.myMissileLocation {
+                            MapCircle(center: missileLocation, radius: Constants.MISSILE_RADIUS)
                                 .foregroundStyle(.red)
                         }
-                        if (shieldLocation.longitude != 00) {
-                            MapCircle(center: shieldLocation, radius: 200)
+                        if let shieldLocation = gameManager.myShieldLocation {
+                            MapCircle(center: shieldLocation, radius: Constants.MISSILE_RADIUS)
                                 .foregroundStyle(.blue)
                         }
                     }
@@ -66,7 +50,7 @@ struct MapView: View {
                     .allowsHitTesting(false)
             }
             
-            ToolbarView(pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
+            ToolbarView(pinLocation: $pinLocation, missileLocation: $gameManager.myMissileLocation, shieldLocation: $gameManager.myShieldLocation)
         }
         .mapScope(mapScope)
     }

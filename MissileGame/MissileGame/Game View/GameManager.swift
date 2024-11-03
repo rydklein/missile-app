@@ -9,9 +9,8 @@ import SwiftUI
 import Foundation
 import MapKit
 
-@Observable class GameManager {
-    public var shared = GameManager()
-    
+@Observable
+class GameManager {
     public var endTime = Date(timeIntervalSinceNow: 60 * 60 * 8)
     public var myMissileLocation: CLLocationCoordinate2D?
     public var myShieldLocation: CLLocationCoordinate2D?

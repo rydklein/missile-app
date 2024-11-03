@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ToolbarView: View {
     @State public var placeMode = false
-    @Binding public var pinLocation: CLLocationCoordinate2D
-    @Binding public var missileLocation: CLLocationCoordinate2D
-    @Binding public var shieldLocation: CLLocationCoordinate2D
-    var body: some View {
+    @Binding public var pinLocation: CLLocationCoordinate2D?
+    @Binding public var missileLocation: CLLocationCoordinate2D?
+    @Binding public var shieldLocation: CLLocationCoordinate2D?
+    var body: some View{
         Group {
             switch placeMode {
             case false:
@@ -81,9 +81,9 @@ struct PrepToolbarView: View {
 
 struct PlaceToolbarView: View {
     @Binding var placeMode: Bool
-    @Binding var pinLocation: CLLocationCoordinate2D
-    @Binding public var missileLocation: CLLocationCoordinate2D
-    @Binding public var shieldLocation: CLLocationCoordinate2D
+    @Binding var pinLocation: CLLocationCoordinate2D?
+    @Binding public var missileLocation: CLLocationCoordinate2D?
+    @Binding public var shieldLocation: CLLocationCoordinate2D?
     var body: some View {
         VStack {
             HStack {
@@ -110,7 +110,9 @@ struct PlaceToolbarView: View {
                 Button {
                     print("Missile button pressed")
                     missileLocation = pinLocation
-                    ToolbarController.shared.placeMissile(missileLocation: missileLocation)
+                    if let missileLocation = missileLocation {
+                        ToolbarController.shared.placeMissile(missileLocation: missileLocation)
+                    }
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 } label: {
                     Image(systemName: "bolt.circle")
@@ -122,7 +124,9 @@ struct PlaceToolbarView: View {
                 Button {
                     print("Shield button pressed")
                     shieldLocation = pinLocation
-                    ToolbarController.shared.placeShield(shieldLocation: shieldLocation)
+                    if let shieldLocation = shieldLocation {
+                        ToolbarController.shared.placeShield(shieldLocation: shieldLocation)
+                    }
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 } label: {
                     Image(systemName: "shield.righthalf.filled")
@@ -140,7 +144,7 @@ struct PlaceToolbarView: View {
 }
 
 #Preview {
-    @Previewable @State var test: CLLocationCoordinate2D = CLLocationCoordinate2D()
+    @Previewable @State var test: CLLocationCoordinate2D? = nil
     NavigationStack {
         VStack {
             Spacer()
