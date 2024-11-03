@@ -19,7 +19,9 @@ class GameManager {
     public var gameState: GameState = .planning
     
     public func launchMissile() {
-        
+        if let location = myMissileLocation {
+            incomingMissile = IncomingMissile(location: location, arrivalTime: .init(timeIntervalSinceNow: 60))
+        }
     }
     
     public func placeMissile(lat: Double, long: Double) {

@@ -21,7 +21,9 @@ struct MapView: View {
                     {
                         UserAnnotation()
                         if let pinLocation = pinLocation {
-                            MapCircle(center: pinLocation, radius: Constants.MISSILE_RADIUS)
+                            if (gameManager.gameState == .planning) {
+                                MapCircle(center: pinLocation, radius: Constants.MISSILE_RADIUS)
+                            }
                         }
                         if let missileLocation = gameManager.myMissileLocation {
                             MapCircle(center: missileLocation, radius: Constants.MISSILE_RADIUS)
@@ -32,7 +34,7 @@ struct MapView: View {
                                 .foregroundStyle(.blue)
                         }
                         if let enemyMissileLocation = gameManager.incomingMissile?.location {
-                            MapCircle(center: gameManager.incomingMissile?.location ?? CLLocationCoordinate2D(latitude: 00, longitude: 00), radius: Constants.MISSILE_RADIUS)
+                            MapCircle(center: enemyMissileLocation, radius: Constants.MISSILE_RADIUS)
                                 .foregroundStyle(.red)
                             
                         }

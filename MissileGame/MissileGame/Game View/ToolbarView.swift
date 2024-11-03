@@ -23,9 +23,9 @@ struct ToolbarView: View {
                 case .prep:
                     PrepToolbarView(gameManager: $gameManager, placeMode: $placeMode)
                 case .place:
-                    PlaceToolbarView(placeMode: $placeMode, pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
+                    PlaceToolbarView(gameManager: $gameManager, placeMode: $placeMode, pinLocation: $pinLocation, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
                 case .action:
-                    ActionToolbarView(placeMode: $placeMode, gameManager: $gameManager)
+                    ActionToolbarView(gameManager: $gameManager, placeMode: $placeMode, missileLocation: $missileLocation, shieldLocation: $shieldLocation)
                 default:
                     EmptyView()
                 }
@@ -119,6 +119,7 @@ struct PrepToolbarView: View {
 }
 
 struct PlaceToolbarView: View {
+    @Binding var gameManager: GameManager
     @Binding var placeMode: ToolbarType
     @Binding var pinLocation: CLLocationCoordinate2D?
     @Binding public var missileLocation: CLLocationCoordinate2D?
@@ -150,7 +151,7 @@ struct PlaceToolbarView: View {
                     print("Missile button pressed")
                     missileLocation = pinLocation
                     if let missileLocation = missileLocation {
-                        ToolbarController.shared.placeMissile(missileLocation: missileLocation)
+                        gameManager.placeMissile(lat: missileLocation.latitude, long: missileLocation.longitude)
                     }
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 } label: {
@@ -164,7 +165,7 @@ struct PlaceToolbarView: View {
                     print("Shield button pressed")
                     shieldLocation = pinLocation
                     if let shieldLocation = shieldLocation {
-                        ToolbarController.shared.placeShield(shieldLocation: shieldLocation)
+                        gameManager.placeShield(lat: shieldLocation.latitude, long: shieldLocation.longitude)
                     }
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 } label: {
@@ -183,8 +184,10 @@ struct PlaceToolbarView: View {
 }
 
 struct ActionToolbarView: View {
-    @Binding var placeMode: ToolbarType
     @Binding var gameManager: GameManager
+    @Binding var placeMode: ToolbarType
+    @Binding public var missileLocation: CLLocationCoordinate2D?
+    @Binding public var shieldLocation: CLLocationCoordinate2D?
     var body: some View {
         VStack {
             HStack {
@@ -211,6 +214,7 @@ struct ActionToolbarView: View {
                 Button {
                     print("Launch button pressed")
                     UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+                    gameManager.launchMissile()
                 } label: {
                     Image(systemName: "bolt.circle")
                         .font(.system(size: 60))
